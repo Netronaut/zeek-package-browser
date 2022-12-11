@@ -13,20 +13,22 @@ async function getDb() {
 
 export async function getAllShortNames() {
   const db = await getDb();
-  return db.all<Pick<Package, "short_name">[]>(
-    "select short_name from packages"
+  const result = await db.all<Pick<Package, "shortName">[]>(
+    "select short_name as shortName from packages"
   );
+
+  return result.map(({ shortName }) => shortName);
 }
 
 export async function getAllPackages() {
   const db = await getDb();
-  return db.all<Package[]>("select * from packages;");
+  return db.all<Package[]>("select *, short_name as shortName from packages;");
 }
 
 export async function getPackageByShortName(shortName: string) {
   const db = await getDb();
   return db.get<Package>(
-    "select * from packages where short_name = ?",
+    "select *, short_name as shortName from packages where short_name = ?",
     shortName
   );
 }

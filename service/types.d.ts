@@ -2,7 +2,7 @@ interface Package {
   id: string;
   name: string;
   author: string;
-  short_name: string;
+  shortName: string;
   url: string;
   readme: string;
   readme_name: string;
