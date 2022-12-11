@@ -13,8 +13,8 @@ interface Params extends ParsedUrlQuery {
 const Package: NextPage<PackageProps> = ({ pkg }) => {
   return (
     <main>
-      <h1>{pkg.shortName}</h1>
-      <p>{pkg.name}</p>
+      <h1 className="text-3xl font-bold">{pkg.shortName}</h1>
+      <p className="underline">{pkg.name}</p>
     </main>
   );
 };
