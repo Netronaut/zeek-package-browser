@@ -1,13 +1,13 @@
 import { GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { getAllShortNames, getPackageByShortName } from "../../service/package";
+import { getAllNames, getPackageByName } from "../../service/package";
 
 interface PackageProps {
   pkg: Package;
 }
 
 interface Params extends ParsedUrlQuery {
-  shortName: string;
+  name: string[];
 }
 
 const Package: NextPage<PackageProps> = ({ pkg }) => {
@@ -22,8 +22,8 @@ const Package: NextPage<PackageProps> = ({ pkg }) => {
 export const getStaticProps: GetStaticProps<PackageProps, Params> = async (
   context
 ) => {
-  const { shortName } = context.params!;
-  const pkg = await getPackageByShortName(shortName);
+  const { name } = context.params!;
+  const pkg = await getPackageByName(["zeek"].concat(name).join("/"));
 
   if (!pkg) {
     return {
@@ -39,9 +39,9 @@ export const getStaticProps: GetStaticProps<PackageProps, Params> = async (
 };
 
 export async function getStaticPaths() {
-  const shortNames = await getAllShortNames();
-  const paths = shortNames.map((shortName) => ({
-    params: { shortName },
+  const names = await getAllNames();
+  const paths = names.map((name) => ({
+    params: { name: name.split("/").slice(1) },
   }));
   return { paths, fallback: "blocking" };
 }

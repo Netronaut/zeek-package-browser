@@ -12,13 +12,11 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h1 className={styles.title}>Welcome to Zeek Package Browser!</h1>
 
         <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.tsx</code>
+          Get started by searching:{" "}
+          <input type="text" placeholder="Enter package name here" />
         </p>
 
         <div className={styles.grid}>
