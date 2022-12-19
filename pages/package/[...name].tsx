@@ -1,6 +1,6 @@
 import { GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
-import { getAllNames, getPackageByName } from "../../service/package";
+import { getAllNames, getPackageByName } from "service/package";
 
 interface PackageProps {
   pkg: Package;
@@ -12,10 +12,10 @@ interface Params extends ParsedUrlQuery {
 
 const Package: NextPage<PackageProps> = ({ pkg }) => {
   return (
-    <main>
+    <>
       <h1 className="text-3xl font-bold">{pkg.shortName}</h1>
       <p className="underline">{pkg.name}</p>
-    </main>
+    </>
   );
 };
 

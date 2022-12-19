@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getPackageByName } from "../../../service/package";
+import { getPackageByName } from "service/package";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,7 +9,7 @@ export default async function handler(
   const pkg = await getPackageByName(name.join("/"));
 
   if (!pkg) {
-    return res.status(404).json({ error: `Package ${name} not found` });
+    return res.status(404).json({ error: `Package '${name}' not found` });
   }
 
   res.status(200).json(pkg);

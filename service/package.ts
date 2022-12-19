@@ -49,9 +49,12 @@ export async function getAllNames() {
   return result.map(({ name }) => name);
 }
 
-export async function getAllPackages() {
+export async function getAllPackages(where?: string) {
+  const query = `select ${select("*")} from packages${
+    where ? ` where ${where}` : ""
+  };`;
   const db = await getDb();
-  return db.all<Package[]>(`select ${select("*")} from packages;`);
+  return db.all<Package[]>(query);
 }
 
 export async function getPackageByName(name: string) {
